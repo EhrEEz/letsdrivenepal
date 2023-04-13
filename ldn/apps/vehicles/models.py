@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
+from apps.authentication.models import SellerProfile
 
 
 # Create your models here.
@@ -26,6 +27,16 @@ class Vehicle(BaseModel):
         "Vehicle is active", default=True, null=False, blank=False
     )
     slug = models.TextField("Vehicle Slug", unique=True, null=True, blank=True)
+    vehicle_image = models.ImageField("Vehicle Image", upload_to="vehicle_image")
+    vehicle_owner = models.ForeignKey(
+        SellerProfile, on_delete=models.CASCADE, verbose_name="Vehicle Owner"
+    )
+    vehicle_daily_price = models.DecimalField(
+        "Vehicle Price",
+        max_digits=6,
+        decimal_places=2,
+        help_text="Cost of renting the Vehicle for a day",
+    )
 
     def save(
         self,
@@ -37,9 +48,9 @@ class Vehicle(BaseModel):
         **kwargs,
     ):
         self.is_active = True
-        if self.color_name is None or self.color_name is "":
+        if self.color_name is None or self.color_name == "":
             self.color_name = self.color_code
-        if self.slug is None or self.slug is "":
+        if self.slug is None or self.slug == "":
             self.slug = slugify(f"{self.name}-{self.reg_no}")
         if update_fields is not None and (
             "reg_no" in update_fields or "name" in update_fields
@@ -61,3 +72,13 @@ class Vehicle(BaseModel):
     class Meta:
         ordering = ["-modification_date", "-creation_date", "name"]
         verbose_name_plural = "Vehicles"
+
+
+class VehicleDetails(BaseModel):
+    vehicle_main = models.OneToOneField(
+        Vehicle, on_delete=models.CASCADE, related_name="vehicle"
+    )
+    registration_document = models.ImageField(
+        "Vehicle Bluebook Information", upload_to="vehicle_details"
+    )
+    vehicle_verified = models.BooleanField("Vehicle Verification", default=False)

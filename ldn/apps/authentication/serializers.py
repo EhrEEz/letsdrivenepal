@@ -2,9 +2,7 @@ from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from django.contrib.auth.hashers import make_password
 
-from .models import (
-    User,
-)
+from .models import User, SellerProfile
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -42,3 +40,9 @@ class UserSerializer(serializers.ModelSerializer):
             instance.set_password(password)
         instance.save()
         return instance
+
+
+class SellerProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = (User,)
+        fields = "__all__"

@@ -8,10 +8,11 @@ from rest_framework.generics import (
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from .models import User
+from .models import User, SellerProfile
 
 from .serializers import (
     UserSerializer,
+    SellerProfileSerializer,
     MyTokenObtainPairSerializer,
 )
 
@@ -54,3 +55,8 @@ class LogoutAndBlacklistRefreshTokenForUserView(APIView):
 class UserProfileView(RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+
+class SellerprofileView(RetrieveUpdateDestroyAPIView):
+    queryset = SellerProfile.objects.all()
+    serializer_class = SellerProfileSerializer

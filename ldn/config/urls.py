@@ -11,6 +11,7 @@ urlpatterns = (
     [
         path("admin/", admin.site.urls),
         path("api/", include(router.urls)),
+        path("api/precise/", include("apps.vehicles.urls"), name="vehicles_urls"),
         path("auth/", include("apps.authentication.urls"), name="authentication"),
     ]
     + staticfiles_urlpatterns()

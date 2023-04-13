@@ -76,3 +76,21 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def email_user(self, subject, message, from_email=None, **kwargs):
         send_mail(subject, message, from_email, [self.email], **kwargs)
+
+
+class SellerProfile(models.Model):
+    creation_date = models.DateTimeField(auto_now_add=True)
+    modification_date = models.DateTimeField(auto_now=True)
+    user = models.OneToOneField("User", on_delete=models.CASCADE)
+    profile_image = models.ImageField(
+        "Profile Picture", upload_to="profile_image", null=True, blank=True
+    )
+    user_verification_document = models.ImageField(
+        "User Verification Document",
+        upload_to="user_verifcation",
+        null=False,
+        blank=False,
+    )
+    total_sales = models.DecimalField(
+        "Seller Total Sales", max_digits=6, decimal_places=2
+    )
