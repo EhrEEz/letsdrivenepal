@@ -1,0 +1,29 @@
+@use '../base/helper' as *;
+@use '../base/mixins' as *;
+@use '../base/base' as *;
+@use '../base/typography' as *;
+@use '../base/functions' as *;
+@use '../base/variables' as *;
+@use 'sass:color';
+
+%f50 {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.round--btn {
+	width: 2rem;
+	aspect-ratio: 1;
+	@extend %f50;
+	background-color: $background;
+	border: none;
+	outline: none !important;
+	border-radius: 100%;
+	transition: 0.2s ease-in-out;
+
+	&:hover {
+		background-color: $background-hover;
+		transition: 0.2s ease-in-out;
+	}
+}

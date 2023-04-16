@@ -1,0 +1,77 @@
+@use "./mixins" as *;
+@use "./functions" as *;
+@use "./variables" as *;
+
+.heading {
+	font-weight: 500;
+	margin-bottom: 0.5em;
+	&--ex {
+		@extend .heading;
+		font-size: fontSize(55);
+		line-height: fontSize(64);
+	}
+	&--1 {
+		@extend .heading;
+		font-size: fontSize(48);
+		line-height: fontSize(60);
+		&_lt {
+			@extend .heading--1;
+			font-weight: 400;
+		}
+	}
+	&--2 {
+		@extend .heading;
+		font-size: fontSize(40);
+		line-height: fontSize(50);
+	}
+	&--3 {
+		@extend .heading;
+		font-size: fontSize(36);
+		line-height: fontSize(45);
+	}
+	&--4 {
+		@extend .heading;
+		font-size: fontSize(34);
+		line-height: fontSize(43);
+	}
+	&--5 {
+		@extend .heading;
+		font-size: fontSize(24);
+		line-height: fontSize(30);
+	}
+	&--6 {
+		@extend .heading;
+		font-size: fontSize(20);
+		line-height: fontSize(25);
+		&-lite {
+			@extend .heading--6;
+			font-weight: 400;
+		}
+	}
+	&--b {
+		font-size: fontSize(16);
+		line-height: fontSize(20);
+		margin-bottom: 0;
+	}
+}
+
+p,
+.regular {
+	font-weight: 400;
+	font-size: fontSize(16);
+	line-height: 150%;
+}
+
+p,
+.regular {
+	span.bold,
+	b {
+		font-weight: 500;
+	}
+}
+
+.regular--20 {
+	font-size: fontSize(20);
+	line-height: fontSize(25);
+	font-weight: 400;
+}

@@ -1,0 +1,10 @@
+@use '../base/helper' as *;
+@use '../base/mixins' as *;
+@use '../base/base' as *;
+@use '../base/typography' as *;
+@use '../base/variables' as *;
+@use '../base/functions' as *;
+@use 'sass:color';
+.con {
+	margin-inline: 100px;
+}
